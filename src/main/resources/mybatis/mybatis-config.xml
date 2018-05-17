@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--特别说明：使用mybatis-spring整合的方式时使用-->
+
+    <settings>
+        <!-- 驼峰的自动映射 -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql" />
+            <!-- 设置为true时，使用RowBounds分页会进行count查询 -->
+            <property name="rowBoundsWithCount" value="true" />
+        </plugin>
+
+        <plugin interceptor="com.github.abel533.mapperhelper.MapperInterceptor">
+            <!--主键自增回写方法,默认值MYSQL,详细说明请看文档 -->
+            <property name="IDENTITY" value="MYSQL" />
+            <!--通用Mapper接口，多个通用接口用逗号隔开 -->
+            <property name="mappers" value="com.github.abel533.mapper.Mapper" />
+        </plugin>
+
+        <!--<plugin interceptor="com.github.abel533.mapper.MapperInterceptor">
+            &lt;!&ndash;================================================&ndash;&gt;
+            &lt;!&ndash;可配置参数说明(一般无需修改)&ndash;&gt;
+            &lt;!&ndash;================================================&ndash;&gt;
+            &lt;!&ndash;UUID生成策略&ndash;&gt;
+            &lt;!&ndash;配置UUID生成策略需要使用OGNL表达式&ndash;&gt;
+            &lt;!&ndash;默认值32位长度:@java.util.UUID@randomUUID().toString().replace("-", "")&ndash;&gt;
+            &lt;!&ndash;<property name="UUID" value="@java.util.UUID@randomUUID().toString()"/>&ndash;&gt;
+            &lt;!&ndash;主键自增回写方法,默认值CALL IDENTITY(),适应于大多数数据库&ndash;&gt;
+            &lt;!&ndash;<property name="IDENTITY" value="CALL IDENTITY()"/>&ndash;&gt;
+            &lt;!&ndash;主键自增回写方法执行顺序,默认AFTER,可选值为(BEFORE|AFTER)&ndash;&gt;
+            &lt;!&ndash;<property name="ORDER" value="AFTER"/>&ndash;&gt;
+        </plugin>-->
+    </plugins>
+
+
+</configuration>
